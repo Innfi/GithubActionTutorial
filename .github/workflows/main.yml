@@ -1,0 +1,13 @@
+name: ga-tutorial
+on: [push] 
+
+jobs: 
+  build:
+    name: github action tutorial
+    runs-on: ubuntu-18.04
+    steps:
+      - name: checkout
+        uses: actions/checkout@master
+
+      - name: print logs
+        uses: echo "logs "
