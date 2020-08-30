@@ -10,4 +10,10 @@ jobs:
         uses: actions/checkout@master
 
       - name: print logs
-        uses: echo "logs "
+        uses: echo "presteps for build"
+      
+      - name: dependencies
+        run: npm install 
+
+      - name: build
+        run: npm run build
