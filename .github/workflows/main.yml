@@ -11,9 +11,29 @@ jobs:
 
       - name: print logs
         run: echo "presteps for build"
+
+      - name: module caching
+        uses: actions/cache@v1
+        with: 
+          path: node_modules
+          key: ${{ runner.OS}}-build-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: | 
+            ${{ runner.OS }}-build-
+            ${{ runner.OS }}-
       
       - name: dependencies
         run: npm install 
 
+      - name: tests
+        run: npm test
+      
       - name: build
         run: npm run build
+
+#      - name: deploy
+#        end: 
+#          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
+#          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#        run: |
+#          aws s3 cp --recursive --region ap-northeast-2 build \
+#          s3://(bucket name)
